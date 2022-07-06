@@ -1,22 +1,42 @@
 {{ define "main" }}
 
-<!-- Main Title -->
-{{ if .Title }}
-<h1 class="main-title">{{ .Title }}</h1>
-{{ end }}
 
 <!-- $pages -->
 {{ $pages := union .RegularPages .Sections }}
 <!---->{{ if .IsHome }} {{ $pages = where site.RegularPages "Type" "in" site.Params.mainSections }}
 {{ end }}
 
+<style>
+.boxed {
+  border: 1px solid gray ;
+  padding: 20px;
+  margin: 10px;
+   border-radius: 25px;
+} 
+</style>
+
+
+
 <!-- Articles -->
 {{ $paginator := .Paginate $pages }} {{ range $index, $page := $paginator.Pages }}
+
+<div class="boxed">
 <article class="post-entry">
   <h2>{{ .Title }}</h2>
   <time>{{ .Date | time.Format ":date_medium" }}</time>
   <a href="{{ .Permalink }}"></a>
 </article>
+
+<!-- Post Tags -->
+  {{ if .Params.tags }}
+  <h2 class="post-tags">
+    {{ range .Params.tags }} {{ $href := print (absURL "tags/") (urlize .) }}
+    <a href="{{ $href }}">{{ . }}</a>
+    {{ end }}
+  </h2>
+  {{ end }}
+
+</div>
 {{ end }}
 
 <!-- Main Nav -->
