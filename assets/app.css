@@ -368,6 +368,7 @@ img {
   background: rgba(var(--dark), 0.05);
   border-radius: 0.5rem;
   padding-inline: 2rem;
+  margin: 0.5rem;
 }
 
 .post-tags a + a {
