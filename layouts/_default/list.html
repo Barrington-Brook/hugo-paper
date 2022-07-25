@@ -7,25 +7,27 @@
 {{ end }}
 
 <style>
-.boxed {
-  border: 1px solid gray ;
-  padding: 17px;
-  margin: 25px;
-  border-radius: 25px;
-  box-shadow: 2px 7px #888888;
-  transition: transform 0.7s;
-} 
- .boxed:hover {
-   transform: scale(1.05) translateX(-50px);
-   background-color: #cfc;
-     
-  }
- .dark .boxed:hover {
-   background-color: #adadad;
+  .boxed {
+    border: 1px solid gray;
+    padding: 17px;
+    margin: 25px;
+    border-radius: 25px;
+    box-shadow: 2px 7px #888888;
+    transition: transform 0.7s;
   }
 
- .post-tags a:hover {
-   transform: scale(1.2)
+  .boxed:hover {
+    transform: scale(1.05) translateX(-50px);
+    background-color: #cfc;
+
+  }
+
+  .dark .boxed:hover {
+    background-color: #adadad;
+  }
+
+  .post-tags a:hover {
+    transform: scale(1.2)
   }
 </style>
 
@@ -35,13 +37,12 @@
 {{ $paginator := .Paginate $pages }} {{ range $index, $page := $paginator.Pages }}
 
 <div class="boxed">
-<article class="post-entry">
-  <h2>{{ .Title }}</h2>
-  <time>{{ .Date | time.Format ":date_medium" }}</time>
-  <a href="{{ .Permalink }}"></a>
-</article>
+  <article class="post-entry">
+    <h2>{{ .Title }}</h2>
+    <a href="{{ .Permalink }}"></a>
+  </article>
 
-<!-- Post Tags -->
+  <!-- Post Tags -->
   {{ if .Params.tags }}
   <h2 class="post-tags">
     {{ range .Params.tags }} {{ $href := print (absURL "tags/") (urlize .) }}
@@ -58,11 +59,13 @@
 <nav class="main-nav">
   {{ if $paginator.HasPrev }}
   <a class="prev" href="{{ $paginator.Prev.URL }}">← {{ i18n "prev_page" }}</a>
-  {{ end }}<!---->
+  {{ end }}
+  <!---->
   {{ if $paginator.HasNext }}
   <a class="next" href="{{ $paginator.Next.URL }}">{{ i18n "next_page" }} →</a>
   {{ end }}
 </nav>
-{{ end }}<!---->
+{{ end }}
+<!---->
 
 {{ end }}
